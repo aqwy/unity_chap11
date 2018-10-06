@@ -20,7 +20,6 @@ public class inventoryManager : MonoBehaviour, IGameManager
         {
             itemDisplay += item.Key + "(" + item.Value + ")";
         }
-        Debug.Log(itemDisplay);
     }
     public bool ConsumeItem(string name)
     {
@@ -81,18 +80,16 @@ public class inventoryManager : MonoBehaviour, IGameManager
         Debug.Log("Inventory manager started...");
         /*theItems = new List<string>();*/
         theNetwork = service;
-        theItems = new Dictionary<string, int>();
+        /*theItems = new Dictionary<string, int>();*/
+        UpdateData(new Dictionary<string, int>());
         status = managerStatus.Started;
     }
-    // Use this for initialization
-    void Start()
+    public void UpdateData(Dictionary<string, int> keys)
     {
-
+        theItems = keys;
     }
-
-    // Update is called once per frame
-    void Update()
+    public Dictionary<string, int> GetData()
     {
-
+        return theItems;
     }
 }

@@ -16,6 +16,11 @@ public class playerManager : MonoBehaviour, IGameManager
         maxHealth = 100;
         status = managerStatus.Started;
     }
+    public void UpDateData(int hp, int maxhp)
+    {
+        health = hp;
+        maxHealth = maxhp;
+    }
     public void changeHealth(int val)
     {
         health += val;
@@ -27,18 +32,15 @@ public class playerManager : MonoBehaviour, IGameManager
         {
             health = 0;
         }
+        if (health == 0)
+        {
+            Messenger.Broadcast(gameEvent.LEVEL_FAILED);
+        }
         /*Debug.Log("Health:" + health + "/" + maxHealth);*/
         Messenger.Broadcast(gameEvent.HEALTH_UPDATED);
     }
-    // Use this for initialization
-    void Start()
+    public void respawn()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        UpDateData(50, 100);
     }
 }
